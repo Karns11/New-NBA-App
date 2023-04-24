@@ -1,0 +1,8 @@
+.text-success {
+    color: rgb(89, 255, 0);
+}
+
+.table-div {
+    max-height: 200vh;
+    overflow-y: auto;
+}

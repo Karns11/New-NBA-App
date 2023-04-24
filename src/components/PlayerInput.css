@@ -1,0 +1,17 @@
+@media (min-width: 768px) {
+    .input-group-text {
+        width: 15%;
+    }
+}
+
+@media (max-width: 768px) {
+    .input-group-text {
+        width: 30%;
+    }
+}
+
+@media (max-width: 576px) {
+    .input-group-text {
+        width: 35%;
+    }
+}
