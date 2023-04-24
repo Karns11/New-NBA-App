@@ -12,12 +12,21 @@ import Header from './Header';
 
 function App() {
 
+  const currentDate = new Date();
+
+  const year = currentDate.getFullYear();
+  const month = String(currentDate.getMonth() + 1).padStart(2, '0');
+  const day = String(currentDate.getDate()).padStart(2, '0');
+  const formattedDate = `${year}-${month}-${day}`;
+
   const [stats, setStats] = useState([]);
   const [player, setPlayer] = useState([]);
   const [input, setInput] = useState("");
-  const [dateInput, setDateInput] = useState("2023-01-01");
+  const [StartDateInput, setStartDateInput] = useState("2023-01-01");
+  const [endDateInput, setEndDateInput] = useState(formattedDate);
   const [isChecked, setIsChecked] = useState(false);
   const [averages, setAverages] = useState({});
+  const [teams, setTeams] = useState([]);
 
 
   function handleSearch(event) {
@@ -26,12 +35,12 @@ function App() {
     .then(response => {
       setPlayer([response.data.data[0].first_name, response.data.data[0].last_name]);
       const playerId = response.data.data[0].id;
-      return axios.get(`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&seasons[]=2022&per_page=100&start_date=${dateInput}`);
+      return axios.get(`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&seasons[]=2022&per_page=100&start_date=${StartDateInput}&end_date=${endDateInput}`);
     })
     .then(response => {
       const responseStats = response.data.data;
       setStats(responseStats);
-      console.log(response.data.data);
+      // console.log(response.data.data);
     })
     .catch(err => {
       console.log(err);
@@ -45,16 +54,31 @@ function App() {
       })
       .then(res => {
           const resAvgs = res.data.data[0];
-          console.log(resAvgs);
+          // console.log(resAvgs);
           setAverages(resAvgs); //object
+      })
+      .catch(err => {
+        console.log(err);
+      });
+
+      axios.get('https://www.balldontlie.io/api/v1/teams')
+      .then(response => {
+        setTeams(response.data.data); //array of objects
+        console.log(response.data.data);
       })
       .catch(err => {
         console.log(err);
       })
   };
 
-  const handleDateReset = () => {
-    setDateInput("2023-01-01");
+
+
+  const handleStartDateReset = () => {
+    setStartDateInput("2023-01-01");
+  }
+
+  const handleEndDateReset = () => {
+    setEndDateInput(formattedDate);
   }
 
   const handleChecked = () => {
@@ -71,14 +95,14 @@ function App() {
       </BrowserRouter> */}
       <Header />
       <div className='container'>
-        <h1 className='text-center pt-3'>{dateInput.substring(0,4)} Season Stats</h1>
+        <h1 className='text-center pt-3'>{StartDateInput.substring(0,4)} Season Stats</h1>
         <div className='row text-center my-5'>
           <PlayerInput input={input} setInput={setInput} />
-          <DateInput handleDateReset={handleDateReset} dateInput={dateInput} setDateInput={setDateInput} />
+          <DateInput handleEndDateReset={handleEndDateReset} endDateInput={endDateInput} setEndDateInput={setEndDateInput} handleStartDateReset={handleStartDateReset} StartDateInput={StartDateInput} setStartDateInput={setStartDateInput} />
           <Search isChecked={isChecked} handleChecked={handleChecked} handleSearch={handleSearch} />
         </div>
         <AvgTable stats={stats} isChecked={isChecked} averages={averages} player={player} />
-        <Table player={player} stats={stats} />
+        <Table teams={teams} player={player} stats={stats} />
       </div>
     </div>
 
