@@ -9,7 +9,7 @@ function StatsTable({ stats, player, teams }) {
       </div>
       <div className='mx-auto table-div mb-5'>
         <table className='table mx-auto'>
-            <thead>
+            <thead className='table-dark'>
               <tr style={{position: 'sticky', top: '0', backgroundColor: '#fff'}}>
                 <th scope='col'>Date</th>
                 <th scope='col'>MINS</th>
