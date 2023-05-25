@@ -6,9 +6,9 @@ function Search({ handleSearch, isChecked, handleChecked }) {
       <div className='column'>
         <button className='mt-3 btn btn-primary' onClick={handleSearch}>Search for stats!</button>
       </div>
-      <div className='column'>
-        <input className='ml-2' type='checkbox' onClick={handleChecked} checked={isChecked} />
-        <label>Show Season Averages</label>
+      <div className='column mt-1'>
+        <input className='ml-2' type='checkbox' onChange={handleChecked} checked={isChecked} />
+        <label>Show Current Season Averages</label>
       </div>
     </div>
   )
