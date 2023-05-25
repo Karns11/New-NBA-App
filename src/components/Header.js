@@ -18,10 +18,6 @@ function Header() {
                     <li className='nav-item px-3'>
                         <a href='#Avg-table' rel="noreferrer" className='nav-link'>Season Averages</a>
                     </li>
-                    <li className='nav-item px-3'>
-                        <a href='#Odds' rel="noreferrer" className='nav-link'>Find Odds</a>
-                        {/* <Link to="/odds" className='nav-link'>Find Odds</Link> */}
-                    </li>
                 </ul>
             </div>
         </div>
