@@ -1,16 +1,16 @@
 import React from 'react';
 
-function AvgTable({ averages, player, isChecked, stats }) {
+function AvgTable({ averages, player, isChecked, stats, year }) {
 
     if (isChecked && stats.length > 0) {
         return (
             <div id="Avg-table">
               <div className='mt-5 text-center'>
-                {player.length===2 && <h2>Showing Season Averages For <i>{player[0] + " " + player[1]}</i></h2>}
+                {player.length===2 && <h2>Showing {year - 1}-{year} Season Averages For <i>{player[0] + " " + player[1]}</i></h2>}
               </div>
               <div className='mx-auto mb-5 table-div'>
                 <table className='table mx-auto'>
-                    <thead>
+                    <thead className='table-dark'>
                       <tr style={{position: 'sticky', top: '0', backgroundColor: '#fff'}}>
                         <th scope='col'>GP</th>
                         <th scope='col'>Min</th>
