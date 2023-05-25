@@ -35,7 +35,7 @@ function App() {
     .then(response => {
       setPlayer([response.data.data[0].first_name, response.data.data[0].last_name]);
       const playerId = response.data.data[0].id;
-      return axios.get(`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&seasons[]=2022&per_page=100&start_date=${StartDateInput}&end_date=${endDateInput}`);
+      return axios.get(`https://www.balldontlie.io/api/v1/stats?player_ids[]=${playerId}&per_page=100&start_date=${StartDateInput}&end_date=${endDateInput}`);
     })
     .then(response => {
       const responseStats = response.data.data;
@@ -95,13 +95,14 @@ function App() {
       </BrowserRouter> */}
       <Header />
       <div className='container'>
-        <h1 className='text-center pt-3'>{StartDateInput.substring(0,4)} Season Stats</h1>
+        {/* <h1 className='text-center pt-3'>{StartDateInput.substring(0,4)}-{endDateInput.substring(0,4)} Season Stats</h1> */}
+        <h1 className='text-center pt-3'>NBA Game Stats</h1>
         <div className='row text-center my-5'>
           <PlayerInput input={input} setInput={setInput} />
           <DateInput handleEndDateReset={handleEndDateReset} endDateInput={endDateInput} setEndDateInput={setEndDateInput} handleStartDateReset={handleStartDateReset} StartDateInput={StartDateInput} setStartDateInput={setStartDateInput} />
           <Search isChecked={isChecked} handleChecked={handleChecked} handleSearch={handleSearch} />
         </div>
-        <AvgTable stats={stats} isChecked={isChecked} averages={averages} player={player} />
+        <AvgTable year={year} stats={stats} isChecked={isChecked} averages={averages} player={player} />
         <Table teams={teams} player={player} stats={stats} />
       </div>
     </div>
